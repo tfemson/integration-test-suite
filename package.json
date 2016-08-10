@@ -1,0 +1,29 @@
+{
+  "name": "serverless-integration-test-suite",
+  "version": "0.1.0",
+  "engines": {
+    "node": ">=4.0"
+  },
+  "author": "serverless.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/serverless/integration-test-suite"
+  },
+  "scripts": {
+    "test": "npm install serverless/serverless && node_modules/mocha/bin/_mocha tests -R spec --recursive && npm uninstall serverless",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "aws-sdk": "^2.4.14",
+    "bluebird": "^3.4.1",
+    "chai": "^3.5.0",
+    "eslint": "^3.2.2",
+    "eslint-config-airbnb": "^10.0.0",
+    "eslint-plugin-import": "^1.12.0",
+    "eslint-plugin-jsx-a11y": "^2.0.1",
+    "eslint-plugin-react": "^6.0.0",
+    "fs-extra": "^0.30.0",
+    "mocha": "^2.5.3"
+  }
+}
