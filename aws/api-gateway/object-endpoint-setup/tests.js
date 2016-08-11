@@ -14,7 +14,7 @@ const createTestService = require('../../../utils/index').createTestService;
 const CF = new AWS.CloudFormation({ region: 'us-east-1' });
 BbPromise.promisifyAll(CF, { suffix: 'Promised' });
 
-describe('AWS - API Gateway: String endpoint setup test', () => {
+describe('AWS - API Gateway: Object endpoint setup test', () => {
   let stackName;
 
   before(() => {
@@ -38,7 +38,7 @@ describe('AWS - API Gateway: String endpoint setup test', () => {
 
     return CF.describeStacksPromised({ StackName: stackName })
       .then((result) => _.find(result.Stacks[0].Outputs,
-          { OutputKey: 'Endpoint1' }).OutputValue)
+        { OutputKey: 'Endpoint1' }).OutputValue)
       .then((endpointOutput) => {
         const endpoint = endpointOutput.match(/https:\/\/.+\.execute-api\..+\.amazonaws\.com.+/)[0];
 

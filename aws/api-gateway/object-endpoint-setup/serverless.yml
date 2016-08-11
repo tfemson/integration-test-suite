@@ -8,4 +8,6 @@ functions:
   hello:
     handler: handler.hello
     events:
-      - http: GET hello
+      - http:
+          method: get
+          path: hello
