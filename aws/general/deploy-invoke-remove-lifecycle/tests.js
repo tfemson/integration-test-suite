@@ -6,15 +6,16 @@ const execSync = require('child_process').execSync;
 const AWS = require('aws-sdk');
 
 const serverlessExec = require('../../../utils/index').serverlessExec;
-const stackName = require('../../../utils/index').stackName;
 const createTestService = require('../../../utils/index').createTestService;
 
 const CF = new AWS.CloudFormation({ region: 'us-east-1' });
 BbPromise.promisifyAll(CF, { suffix: 'Promised' });
 
 describe('AWS - General: Deploy, invoke, remove lifecycle test', () => {
+  let stackName;
+
   before(() => {
-    createTestService('aws-nodejs');
+    stackName = createTestService('aws-nodejs');
   });
 
   it('should deploy the service to AWS', function () {
