@@ -6,16 +6,13 @@ const fse = require('fs-extra');
 const execSync = require('child_process').execSync;
 
 const serverlessExec = path.join(process.cwd(), 'node_modules', 'serverless', 'bin', 'serverless');
-const tmpDir = path.join(os.tmpdir(), (new Date()).getTime().toString());
-const serviceName = `service-${(new Date()).getTime().toString()}`;
-const stackName = `${serviceName}-dev`;
 
 module.exports = {
   serverlessExec,
-  tmpDir,
-  serviceName,
-  stackName,
   createTestService: (templateName, assetsToCopy) => {
+    const serviceName = `service-${(new Date()).getTime().toString()}`;
+    const tmpDir = path.join(os.tmpdir(), (new Date()).getTime().toString());
+
     fse.mkdirSync(tmpDir);
     process.chdir(tmpDir);
 
@@ -39,6 +36,7 @@ module.exports = {
 
     execSync(`sed -i.bak s/${templateName}/${serviceName}/g serverless.yml`);
 
-    return tmpDir;
+    // return the name of the CloudFormation stack
+    return `${serviceName}-dev`;
   },
 };
