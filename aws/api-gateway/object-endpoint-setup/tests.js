@@ -38,9 +38,10 @@ describe('AWS - API Gateway: Object endpoint setup test', () => {
 
     return CF.describeStacksPromised({ StackName: stackName })
       .then((result) => _.find(result.Stacks[0].Outputs,
-        { OutputKey: 'Endpoint1' }).OutputValue)
+        { OutputKey: 'ServiceEndpoint' }).OutputValue)
       .then((endpointOutput) => {
-        const endpoint = endpointOutput.match(/https:\/\/.+\.execute-api\..+\.amazonaws\.com.+/)[0];
+        let endpoint = endpointOutput.match(/https:\/\/.+\.execute-api\..+\.amazonaws\.com.+/)[0];
+        endpoint = `${endpoint}/hello`;
 
         return fetch(endpoint)
           .then(response => response.json())
