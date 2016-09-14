@@ -8,4 +8,11 @@ functions:
   hello:
     handler: handler.hello
     events:
+      - http: POST hello
       - http: GET hello
+      - http:
+          method: PUT
+          path: hello
+      - http:
+          method: DELETE
+          path: hello
