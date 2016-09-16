@@ -18,10 +18,7 @@ describe('AWS - API Gateway: String endpoint setup test', () => {
   let stackName;
 
   before(() => {
-    stackName = createTestService('aws-nodejs', [
-      path.join(__dirname, 'serverless.yml'),
-      path.join(__dirname, 'handler.js'),
-    ]);
+    stackName = createTestService('aws-nodejs', path.join(__dirname, 'test-service'));
   });
 
   it('should deploy the service to AWS', function () {
