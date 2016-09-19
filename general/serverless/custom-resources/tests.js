@@ -5,6 +5,8 @@ const expect = require('chai').expect;
 const AWS = require('aws-sdk');
 const BbPromise = require('bluebird');
 const _ = require('lodash');
+const fse = require('fs-extra');
+const crypto = require('crypto');
 
 const Utils = require('../../../utils/index');
 
@@ -15,11 +17,24 @@ BbPromise.promisifyAll(S3, { suffix: 'Promised' });
 
 describe('General - Serverless: Custom resources test', () => {
   let stackName;
+  let s3BucketName;
 
   before(function () {
     this.timeout(0);
 
     stackName = Utils.createTestService('aws-nodejs', path.join(__dirname, 'test-service'));
+
+    // replace name of bucket which is created through custom resources with something unique
+    const serverlessYmlFilePath = path.join(process.cwd(), 'serverless.yml');
+    let serverlessYmlFileContent = fse.readFileSync(serverlessYmlFilePath).toString();
+
+    s3BucketName = crypto.randomBytes(8).toString('hex');
+
+    serverlessYmlFileContent = serverlessYmlFileContent
+      .replace(/WillBeReplacedBeforeDeployment/, s3BucketName);
+
+    fse.writeFileSync(serverlessYmlFilePath, serverlessYmlFileContent);
+
     Utils.deployService();
   });
 
@@ -39,7 +54,7 @@ describe('General - Serverless: Custom resources test', () => {
 
     return S3.listBucketsPromised()
       .then((result) => !!_.find(result.Buckets,
-        { Name: 'com.serverless.tests.integration.my.custom.s3.bucket' }))
+        { Name: s3BucketName }))
       .then((found) => expect(found).to.equal(true));
   });
 

@@ -13,7 +13,7 @@ resources:
     MyCustomS3Bucket:
       Type: 'AWS::S3::Bucket'
       Properties:
-        BucketName: com.serverless.tests.integration.my.custom.s3.bucket
+        BucketName: WillBeReplacedBeforeDeployment
   Outputs:
     MyCustomOutput:
       Value: SomeValue
