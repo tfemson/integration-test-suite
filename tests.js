@@ -10,3 +10,6 @@ require('./aws/api-gateway/object-endpoint-setup/tests');
 
 // Custom Plugin
 require('./general/serverless/custom-plugins/tests');
+
+// Custom resources
+require('./general/serverless/custom-resources/tests');
