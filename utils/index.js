@@ -6,6 +6,7 @@ const fse = require('fs-extra');
 const execSync = require('child_process').execSync;
 const AWS = require('aws-sdk');
 const BbPromise = require('bluebird');
+const crypto = require('crypto');
 
 const serverlessExec = path.join(process.cwd(), 'node_modules', 'serverless', 'bin', 'serverless');
 
@@ -14,7 +15,7 @@ module.exports = {
 
   createTestService: (templateName, testServiceDir) => {
     const serviceName = `service-${(new Date()).getTime().toString()}`;
-    const tmpDir = path.join(os.tmpdir(), (new Date()).getTime().toString());
+    const tmpDir = path.join(os.tmpdir(), crypto.randomBytes(8).toString('hex'));
 
     fse.mkdirsSync(tmpDir);
     process.chdir(tmpDir);
