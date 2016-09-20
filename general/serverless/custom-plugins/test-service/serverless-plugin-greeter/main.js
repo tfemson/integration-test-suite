@@ -19,7 +19,7 @@ class Greeter {
   }
 
   greet() {
-    console.log('Hello from the greeter plugin!');
+    process.stdout.write('Hello from the greeter plugin!');
   }
 }
 
