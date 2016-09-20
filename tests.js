@@ -24,6 +24,12 @@ require('./aws/sns/multipleTopics-singleFunction/tests');
 require('./aws/sns/singleTopic-multipleFunctions/tests');
 require('./aws/sns/singleTopic-singleFunction/tests');
 
+// S3
+require('./aws/s3/multipleEvents-multipleFunctions-multipleBuckets/tests');
+require('./aws/s3/multipleEvents-multipleFunctions-singleBucket/tests');
+require('./aws/s3/multipleEvents-singleFunction-singleBucket/tests');
+require('./aws/s3/singleEvent-singleFunction-singleBucket/tests');
+
 // General
 // Custom Plugin
 require('./general/custom-plugins/tests');

@@ -1,0 +1,9 @@
+service: aws-nodejs
+
+provider: aws
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - s3: ${env:BUCKET_1}

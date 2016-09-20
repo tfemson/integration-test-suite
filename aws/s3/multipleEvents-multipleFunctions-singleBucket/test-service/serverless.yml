@@ -1,0 +1,15 @@
+service: aws-nodejs
+
+provider: aws
+
+functions:
+  create:
+    handler: handler.create
+    events:
+      - s3: serverless-integration-test-suite-s3
+  remove:
+    handler: handler.remove
+    events:
+      - s3:
+          bucket: serverless-integration-test-suite-s3
+          event: s3:ObjectRemoved:*
