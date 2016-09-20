@@ -8,8 +8,9 @@ require('./aws/general/deploy-invoke-remove-lifecycle/tests');
 require('./aws/api-gateway/string-endpoint-setup/tests');
 require('./aws/api-gateway/object-endpoint-setup/tests');
 
+// Custom resources
+require('./aws/general/custom-resources/tests');
+
+// General (Serverless)
 // Custom Plugin
 require('./general/serverless/custom-plugins/tests');
-
-// Custom resources
-require('./general/serverless/custom-resources/tests');
