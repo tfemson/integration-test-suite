@@ -27,6 +27,6 @@ describe('AWS - Schedule: multiple schedules with multiple functions', function 
   );
 
   after(() => {
-    Utils.removeService();
+    // Utils.removeService();
   });
 });
