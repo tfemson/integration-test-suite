@@ -3,6 +3,7 @@
 const path = require('path');
 const expect = require('chai').expect;
 const BbPromise = require('bluebird');
+const execSync = require('child_process').execSync;
 const AWS = require('aws-sdk');
 const _ = require('lodash');
 const fetch = require('node-fetch');
@@ -38,15 +39,17 @@ describe('AWS - API Gateway: API keys setup test', () => {
       });
   });
 
-  it('should expose the API key(s) in the CloudFormation Outputs', function () {
+  it('should expose the API key(s) with its values when running the info command', function () {
     this.timeout(0);
 
-    return CF.describeStacksPromised({ StackName: stackName })
-      .then((result) => _.find(result.Stacks[0].Outputs,
-        { OutputKey: 'ApiGatewayApiKey1Value' }).OutputValue)
-      .then((apiKeyOutput) => {
-        apiKey = apiKeyOutput;
-      });
+    const info = execSync(`${Utils.serverlessExec} info`);
+
+    const stringifiedOutput = (new Buffer(info, 'base64').toString());
+
+    // some regex magic to extract the first API key value from the info output
+    apiKey = stringifiedOutput.match(/(api keys:\n)(\s*)(.+):(\s*)(.+)/)[5];
+
+    expect(apiKey.length).to.be.above(0);
   });
 
   it('should reject a request with an invalid API Key', function () {
