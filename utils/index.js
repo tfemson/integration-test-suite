@@ -8,12 +8,8 @@ const AWS = require('aws-sdk');
 const BbPromise = require('bluebird');
 const crypto = require('crypto');
 
-<<<<<<< 06bee4e28d092119cf8aa74d8712509985aa8f11
+
 const serverlessExec = path.join(process.cwd(), 'node_modules', 'serverless', 'bin', 'serverless');
-=======
-// const serverlessExec = path.join(process.cwd(), 'node_modules', 'serverless', 'bin', 'serverless');
-const serverlessExec = 'serverless';
->>>>>>> getting bucket from env var
 module.exports = {
   serverlessExec,
 
