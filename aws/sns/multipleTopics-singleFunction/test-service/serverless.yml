@@ -7,7 +7,4 @@ functions:
     handler: handler.hello
     events:
       - sns: ${env:TOPIC_1}
-  world:
-    handler: handler.world
-    events:
       - sns: ${env:TOPIC_2}

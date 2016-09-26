@@ -23,4 +23,3 @@ require('./aws/sns/singleTopic-singleFunction/tests');
 // Custom Plugin
 require('./general/serverless/custom-plugins/tests');
 require('./general/serverless/functions/nested-handler-file/tests');
-
