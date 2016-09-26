@@ -6,4 +6,4 @@ functions:
   hello:
     handler: handler.hello
     events:
-      - sns: serverless-integration-test-suite-sns
+      - sns: ${env:TOPIC_1}

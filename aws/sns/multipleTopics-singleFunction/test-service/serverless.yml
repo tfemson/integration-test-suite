@@ -6,8 +6,8 @@ functions:
   hello:
     handler: handler.hello
     events:
-      - sns: serverless-integration-test-suite-sns-1
+      - sns: ${env:TOPIC_1}
   world:
     handler: handler.world
     events:
-      - sns: serverless-integration-test-suite-sns-2
+      - sns: ${env:TOPIC_2}

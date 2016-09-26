@@ -13,8 +13,8 @@ describe('AWS - SNS: multiple topics single function', function () {
   });
 
   it('should trigger function when new message is published', () => Utils
-    .publishSnsMessage('serverless-integration-test-suite-sns-1', 'topic1')
-    .then(() => Utils.publishSnsMessage('serverless-integration-test-suite-sns-2', 'topic2'))
+    .publishSnsMessage(process.env.TOPIC_1, 'topic1')
+    .then(() => Utils.publishSnsMessage(process.env.TOPIC_2, 'topic2'))
     .delay(60000)
     .then(() => {
       const logs = Utils.getFunctionLogs('hello');

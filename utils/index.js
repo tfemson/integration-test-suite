@@ -9,7 +9,6 @@ const BbPromise = require('bluebird');
 const crypto = require('crypto');
 
 const serverlessExec = path.join(process.cwd(), 'node_modules', 'serverless', 'bin', 'serverless');
-
 module.exports = {
   serverlessExec,
 
@@ -28,6 +27,9 @@ module.exports = {
     }
 
     execSync(`sed -i.bak s/${templateName}/${serviceName}/g serverless.yml`);
+
+    process.env.TOPIC_1 = `${serviceName}-1`;
+    process.env.TOPIC_2 = `${serviceName}-1`;
 
     // return the name of the CloudFormation stack
     return `${serviceName}-dev`;
