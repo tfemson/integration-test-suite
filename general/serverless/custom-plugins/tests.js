@@ -30,7 +30,7 @@ describe('General - Serverless: Custom plugins test', () => {
     // note: the result will return a newline at the end
     const result = new Buffer(pluginExecution, 'base64').toString();
 
-    expect(result).to.equal('Hello from the greeter plugin!\n');
+    expect(result).to.equal('Hello from the greeter plugin!');
   });
 
   after(function () {

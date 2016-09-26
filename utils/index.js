@@ -71,6 +71,7 @@ module.exports = {
   getFunctionLogs(functionName) {
     const logs = execSync(`${serverlessExec} logs --function ${functionName} --noGreeting true`);
     const logsString = new Buffer(logs, 'base64').toString();
+    process.stdout.write(logsString);
     return logsString;
   },
 
