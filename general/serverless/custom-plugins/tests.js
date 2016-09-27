@@ -6,10 +6,10 @@ const execSync = require('child_process').execSync;
 
 const Utils = require('../../../utils/index');
 
-describe('General - Serverless: Custom plugins test', () => {
-  before(function () {
-    this.timeout(0);
+describe('General - Serverless: Custom plugins test', function () {
+  this.timeout(0);
 
+  before(() => {
     Utils.createTestService('aws-nodejs', path.join(__dirname, 'test-service'));
 
     // cd into the plugins directory
@@ -22,9 +22,7 @@ describe('General - Serverless: Custom plugins test', () => {
     execSync('cd ..');
   });
 
-  it('should successfully run the greet command of the custom plugin', function () {
-    this.timeout(0);
-
+  it('should successfully run the greet command of the custom plugin', () => {
     const pluginExecution = execSync(`${Utils.serverlessExec} greet`);
 
     // note: the result will return a newline at the end
@@ -33,9 +31,7 @@ describe('General - Serverless: Custom plugins test', () => {
     expect(result).to.equal('Hello from the greeter plugin!');
   });
 
-  after(function () {
-    this.timeout(0);
-
+  after(() => {
     // unlink the npm package
     execSync('npm r serverless-plugin-greeter -g');
   });
