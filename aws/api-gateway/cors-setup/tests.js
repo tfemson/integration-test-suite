@@ -12,32 +12,28 @@ const Utils = require('../../../utils/index');
 const CF = new AWS.CloudFormation({ region: 'us-east-1' });
 BbPromise.promisifyAll(CF, { suffix: 'Promised' });
 
-describe('AWS - API Gateway: CORS setup test', () => {
+describe('AWS - API Gateway: CORS setup test', function () {
+  this.timeout(0);
+
   let stackName;
   let endpointBase;
 
-  before(function () {
-    this.timeout(0);
-
+  before(() => {
     stackName = Utils.createTestService('aws-nodejs', path.join(__dirname, 'test-service'));
     Utils.deployService();
   });
 
-  it('should expose the endpoint(s) in the CloudFormation Outputs', function () {
-    this.timeout(0);
-
-    return CF.describeStacksPromised({ StackName: stackName })
+  it('should expose the endpoint(s) in the CloudFormation Outputs', () =>
+    CF.describeStacksPromised({ StackName: stackName })
       .then((result) => _.find(result.Stacks[0].Outputs,
         { OutputKey: 'ServiceEndpoint' }).OutputValue)
       .then((endpointOutput) => {
         endpointBase = endpointOutput.match(/https:\/\/.+\.execute-api\..+\.amazonaws\.com.+/)[0];
-      });
-  });
+      })
+  );
 
-  it('should setup CORS support with simple string config', function () {
-    this.timeout(0);
-
-    return fetch(`${endpointBase}/simple-cors`, { method: 'OPTIONS' })
+  it('should setup CORS support with simple string config', () =>
+    fetch(`${endpointBase}/simple-cors`, { method: 'OPTIONS' })
       .then((response) => {
         const headers = response.headers;
 
@@ -45,13 +41,11 @@ describe('AWS - API Gateway: CORS setup test', () => {
           .to.equal('Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token');
         expect(headers.get('access-control-allow-methods')).to.equal('OPTIONS,GET');
         expect(headers.get('access-control-allow-origin')).to.equal('*');
-      });
-  });
+      })
+  );
 
-  it('should setup CORS support with complex object config', function () {
-    this.timeout(0);
-
-    return fetch(`${endpointBase}/complex-cors`, { method: 'OPTIONS' })
+  it('should setup CORS support with complex object config', () =>
+    fetch(`${endpointBase}/complex-cors`, { method: 'OPTIONS' })
       .then((response) => {
         const headers = response.headers;
 
@@ -59,12 +53,10 @@ describe('AWS - API Gateway: CORS setup test', () => {
           .to.equal('Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token');
         expect(headers.get('access-control-allow-methods')).to.equal('OPTIONS,GET');
         expect(headers.get('access-control-allow-origin')).to.equal('*');
-      });
-  });
+      })
+  );
 
-  after(function () {
-    this.timeout(0);
-
+  after(() => {
     Utils.removeService();
   });
 });
