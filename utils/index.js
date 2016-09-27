@@ -16,7 +16,8 @@ module.exports = {
   createTestService: (templateName, testServiceDir) => {
     const serviceName = `service-${(new Date()).getTime().toString()}`;
     const tmpDir = path.join(os.tmpdir(),
-      'tmpdirs-serverless-integration-test-suite',
+      'tmpdirs-serverless',
+      'integration-test-suite',
       crypto.randomBytes(8).toString('hex'));
 
     fse.mkdirsSync(tmpDir);
