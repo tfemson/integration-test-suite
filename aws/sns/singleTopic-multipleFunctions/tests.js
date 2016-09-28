@@ -9,6 +9,7 @@ describe('AWS - SNS: single topic with multiple functions', function () {
 
   before(() => {
     Utils.createTestService('aws-nodejs', path.join(__dirname, 'test-service'));
+    Utils.setupTopicNames();
     Utils.deployService();
   });
 

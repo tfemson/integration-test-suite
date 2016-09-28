@@ -9,6 +9,7 @@ describe('AWS - S3: multiple events in a single function with a single bucket', 
 
   before(() => {
     Utils.createTestService('aws-nodejs', path.join(__dirname, 'test-service'));
+    Utils.setupBucketNames();
     Utils.deployService();
   });
 

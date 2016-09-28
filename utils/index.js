@@ -10,11 +10,11 @@ const crypto = require('crypto');
 
 
 const serverlessExec = path.join(process.cwd(), 'node_modules', 'serverless', 'bin', 'serverless');
+const serviceName = `service-${(new Date()).getTime().toString()}`;
 module.exports = {
   serverlessExec,
 
   createTestService: (templateName, testServiceDir) => {
-    const serviceName = `service-${(new Date()).getTime().toString()}`;
     const tmpDir = path.join(os.tmpdir(),
       'tmpdirs-serverless',
       'integration-test-suite',
@@ -31,11 +31,6 @@ module.exports = {
     }
 
     execSync(`sed -i.bak s/${templateName}/${serviceName}/g serverless.yml`);
-
-    process.env.TOPIC_1 = `${serviceName}-1`;
-    process.env.TOPIC_2 = `${serviceName}-1`;
-    process.env.BUCKET_1 = `${serviceName}-1`;
-    process.env.BUCKET_2 = `${serviceName}-2`;
 
     // return the name of the CloudFormation stack
     return `${serviceName}-dev`;
@@ -89,5 +84,15 @@ module.exports = {
 
   removeService() {
     execSync(`${serverlessExec} remove`, { stdio: 'inherit' });
+  },
+
+  setupTopicNames() {
+    process.env.TOPIC_1 = `${serviceName}-1`;
+    process.env.TOPIC_2 = `${serviceName}-1`;
+  },
+
+  setupBucketNames() {
+    process.env.BUCKET_1 = `${serviceName}-1`;
+    process.env.BUCKET_2 = `${serviceName}-2`;
   },
 };
