@@ -9,6 +9,7 @@ require('./aws/general/custom-resources/tests');
 require('./aws/api-gateway/simple-api-setup/tests');
 require('./aws/api-gateway/custom-authorizers-setup/tests');
 require('./aws/api-gateway/cors-setup/tests');
+require('./aws/api-gateway/api-keys-setup/tests');
 
 // Schedule
 require('./aws/schedule/multipleSchedules-multipleFunctions/tests');
