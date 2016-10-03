@@ -6,14 +6,14 @@ functions:
   hello:
     handler: handler.hello
     events:
-      - s3: serverless-integration-test-suite-s3-1
+      - s3: ${env:BUCKET_1}
       - s3:
-          bucket: serverless-integration-test-suite-s3-1
+          bucket: ${env:BUCKET_1}
           event: s3:ObjectRemoved:*
   world:
     handler: handler.world
     events:
-      - s3: serverless-integration-test-suite-s3-2
+      - s3: ${env:BUCKET_2}
       - s3:
-          bucket: serverless-integration-test-suite-s3-2
+          bucket: ${env:BUCKET_2}
           event: s3:ObjectRemoved:*

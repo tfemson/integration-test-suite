@@ -6,7 +6,7 @@ functions:
   hello:
     handler: handler.hello
     events:
-      - s3: serverless-integration-test-suite-s3
+      - s3: ${env:BUCKET_1}
       - s3:
-          bucket: serverless-integration-test-suite-s3
+          bucket: ${env:BUCKET_1}
           event: s3:ObjectRemoved:*
