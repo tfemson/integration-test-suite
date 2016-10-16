@@ -11,6 +11,8 @@ require('./aws/api-gateway/integration-lambda/simple-api-setup/tests');
 require('./aws/api-gateway/integration-lambda/custom-authorizers-setup/tests');
 require('./aws/api-gateway/integration-lambda/cors-setup/tests');
 require('./aws/api-gateway/integration-lambda/api-keys-setup/tests');
+// Integration: Lambda Proxy
+require('./aws/api-gateway/integration-lambda-proxy/simple-api-setup/tests');
 
 // Schedule
 require('./aws/schedule/multipleSchedules-multipleFunctions/tests');
