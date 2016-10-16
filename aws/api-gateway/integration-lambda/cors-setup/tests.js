@@ -12,7 +12,7 @@ const Utils = require('../../../../utils/index');
 const CF = new AWS.CloudFormation({ region: 'us-east-1' });
 BbPromise.promisifyAll(CF, { suffix: 'Promised' });
 
-describe('AWS - API Gateway: CORS setup test', function () {
+describe('AWS - API Gateway (Integration: Lambda): CORS setup test', function () {
   this.timeout(0);
 
   let stackName;
