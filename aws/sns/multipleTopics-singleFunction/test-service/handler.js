@@ -1,7 +1,7 @@
 'use strict';
 
-module.exports.hello = (event, context, cb) => {
+module.exports.hello = (event, context, callback) => {
   process.stdout.write(event.Records[0].EventSource);
   process.stdout.write(event.Records[0].Sns.Message);
-  cb(null, { message: 'Hello from SNS!', event });
+  callback(null, { message: 'Hello from SNS!', event });
 };

@@ -7,12 +7,12 @@ const AWS = require('aws-sdk');
 const _ = require('lodash');
 const fetch = require('node-fetch');
 
-const Utils = require('../../../utils/index');
+const Utils = require('../../../../utils/index');
 
 const CF = new AWS.CloudFormation({ region: 'us-east-1' });
 BbPromise.promisifyAll(CF, { suffix: 'Promised' });
 
-describe('AWS - API Gateway: Custom authorizers setup test', function () {
+describe('AWS - API Gateway (Integration: Lambda): Simple API setup test', function () {
   this.timeout(0);
 
   let stackName;
@@ -33,28 +33,28 @@ describe('AWS - API Gateway: Custom authorizers setup test', function () {
       })
   );
 
-  it('should reject requests without authorization', () =>
-    fetch(endpoint)
-      .then((response) => {
-        expect(response.status).to.equal(401);
-      })
-  );
-
-  it('should reject requests with wrong authorization', () =>
-    fetch(endpoint, { headers: { Authorization: 'Bearer ShouldNotBeAuthorized' } })
-      .then((response) => {
-        expect(response.status).to.equal(401);
-      })
-  );
-
-  it('should authorize requests with correct authorization', () =>
-    fetch(endpoint, { headers: { Authorization: 'Bearer ShouldBeAuthorized' } })
+  it('should expose an accessible POST HTTP endpoint', () =>
+    fetch(endpoint, { method: 'POST' })
       .then(response => response.json())
-      .then((json) => {
-        expect(json.message).to.equal('Successfully authorized!');
-        expect(json.event.principalId).to.equal('SomeRandomId');
-        expect(json.event.headers.Authorization).to.equal('Bearer ShouldBeAuthorized');
-      })
+      .then((json) => expect(json.message).to.equal('Hello from API Gateway!'))
+  );
+
+  it('should expose an accessible GET HTTP endpoint', () =>
+    fetch(endpoint)
+      .then(response => response.json())
+      .then((json) => expect(json.message).to.equal('Hello from API Gateway!'))
+  );
+
+  it('should expose an accessible PUT HTTP endpoint', () =>
+    fetch(endpoint, { method: 'PUT' })
+      .then(response => response.json())
+      .then((json) => expect(json.message).to.equal('Hello from API Gateway!'))
+  );
+
+  it('should expose an accessible DELETE HTTP endpoint', () =>
+    fetch(endpoint, { method: 'DELETE' })
+      .then(response => response.json())
+      .then((json) => expect(json.message).to.equal('Hello from API Gateway!'))
   );
 
   after(() => {

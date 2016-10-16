@@ -8,14 +8,14 @@ const AWS = require('aws-sdk');
 const _ = require('lodash');
 const fetch = require('node-fetch');
 
-const Utils = require('../../../utils/index');
+const Utils = require('../../../../utils/index');
 
 const CF = new AWS.CloudFormation({ region: 'us-east-1' });
 const APIG = new AWS.APIGateway({ region: 'us-east-1' });
 BbPromise.promisifyAll(CF, { suffix: 'Promised' });
 BbPromise.promisifyAll(APIG, { suffix: 'Promised' });
 
-describe('AWS - API Gateway: API keys setup test', () => {
+describe('AWS - API Gateway (Integration: Lambda): API keys setup test', () => {
   let stackName;
   let endpoint;
   let apiKey;

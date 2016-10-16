@@ -3,6 +3,8 @@ service: aws-nodejs # NOTE: update this with your service name
 provider:
   name: aws
   runtime: nodejs4.3
+  apiKeys:
+    - myApiKey
 
 functions:
   hello:
@@ -11,6 +13,5 @@ functions:
       - http:
           path: hello
           method: GET
-          authorizer: auth
-  auth:
-    handler: handler.auth
+          integration: lambda
+          private: true
