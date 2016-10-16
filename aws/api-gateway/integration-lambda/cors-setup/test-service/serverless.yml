@@ -11,10 +11,12 @@ functions:
       - http:
           method: GET
           path: simple-cors
+          integration: lambda
           cors: true
       - http:
           method: GET
           path: complex-cors
+          integration: lambda
           cors:
             origins:
               - '*'

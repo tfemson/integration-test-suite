@@ -21,8 +21,8 @@ const generatePolicy = (principalId, effect, resource) => {
 };
 
 // protected function
-module.exports.hello = (event, context, cb) => {
-  cb(null, { message: 'Successfully authorized!', event });
+module.exports.hello = (event, context, callback) => {
+  callback(null, { message: 'Successfully authorized!', event });
 };
 
 // auth function

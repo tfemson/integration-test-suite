@@ -7,7 +7,7 @@ const AWS = require('aws-sdk');
 const _ = require('lodash');
 const fetch = require('node-fetch');
 
-const Utils = require('../../../utils/index');
+const Utils = require('../../../../utils/index');
 
 const CF = new AWS.CloudFormation({ region: 'us-east-1' });
 BbPromise.promisifyAll(CF, { suffix: 'Promised' });
