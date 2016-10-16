@@ -6,6 +6,7 @@ require('./aws/general/deploy-invoke-remove-lifecycle/tests');
 require('./aws/general/custom-resources/tests');
 
 // API Gateway
+// Integration: Lambda
 require('./aws/api-gateway/integration-lambda/simple-api-setup/tests');
 require('./aws/api-gateway/integration-lambda/custom-authorizers-setup/tests');
 require('./aws/api-gateway/integration-lambda/cors-setup/tests');
