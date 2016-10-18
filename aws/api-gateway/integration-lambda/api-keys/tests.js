@@ -15,7 +15,7 @@ const APIG = new AWS.APIGateway({ region: 'us-east-1' });
 BbPromise.promisifyAll(CF, { suffix: 'Promised' });
 BbPromise.promisifyAll(APIG, { suffix: 'Promised' });
 
-describe('AWS - API Gateway (Integration: Lambda): API keys setup test', () => {
+describe('AWS - API Gateway (Integration: Lambda): API keys test', () => {
   let stackName;
   let endpoint;
   let apiKey;
