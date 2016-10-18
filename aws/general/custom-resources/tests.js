@@ -15,7 +15,7 @@ const S3 = new AWS.S3({ region: 'us-east-1' });
 BbPromise.promisifyAll(CF, { suffix: 'Promised' });
 BbPromise.promisifyAll(S3, { suffix: 'Promised' });
 
-describe('General - Serverless: Custom resources test', function () {
+describe('AWS - General: Custom resources test', function () {
   this.timeout(0);
 
   let stackName;

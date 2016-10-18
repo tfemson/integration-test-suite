@@ -4,9 +4,9 @@ const path = require('path');
 const expect = require('chai').expect;
 const execSync = require('child_process').execSync;
 
-const Utils = require('../../../../utils/index');
+const Utils = require('../../../utils/index');
 
-describe('General - Serverless: Nested handler file', function () {
+describe('AWS - General: Nested handlers', function () {
   this.timeout(0);
 
   before(() => {

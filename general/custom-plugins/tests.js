@@ -4,9 +4,9 @@ const path = require('path');
 const expect = require('chai').expect;
 const execSync = require('child_process').execSync;
 
-const Utils = require('../../../utils/index');
+const Utils = require('../../utils/index');
 
-describe('General - Serverless: Custom plugins test', function () {
+describe('General: Custom plugins test', function () {
   this.timeout(0);
 
   before(() => {

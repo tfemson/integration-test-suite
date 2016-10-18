@@ -12,7 +12,7 @@ const Utils = require('../../../../utils/index');
 const CF = new AWS.CloudFormation({ region: 'us-east-1' });
 BbPromise.promisifyAll(CF, { suffix: 'Promised' });
 
-describe('AWS - API Gateway (Integration: Lambda Proxy): Simple API setup test', function () {
+describe('AWS - API Gateway (Integration: Lambda): Simple API test', function () {
   this.timeout(0);
 
   let stackName;
@@ -36,33 +36,25 @@ describe('AWS - API Gateway (Integration: Lambda Proxy): Simple API setup test',
   it('should expose an accessible POST HTTP endpoint', () =>
     fetch(endpoint, { method: 'POST' })
       .then(response => response.json())
-      .then((json) => {
-        expect(json.message).to.equal('Hello from API Gateway!');
-      })
+      .then((json) => expect(json.message).to.equal('Hello from API Gateway!'))
   );
 
   it('should expose an accessible GET HTTP endpoint', () =>
     fetch(endpoint)
       .then(response => response.json())
-      .then((json) => {
-        expect(json.message).to.equal('Hello from API Gateway!');
-      })
+      .then((json) => expect(json.message).to.equal('Hello from API Gateway!'))
   );
 
   it('should expose an accessible PUT HTTP endpoint', () =>
     fetch(endpoint, { method: 'PUT' })
       .then(response => response.json())
-      .then((json) => {
-        expect(json.message).to.equal('Hello from API Gateway!');
-      })
+      .then((json) => expect(json.message).to.equal('Hello from API Gateway!'))
   );
 
   it('should expose an accessible DELETE HTTP endpoint', () =>
     fetch(endpoint, { method: 'DELETE' })
       .then(response => response.json())
-      .then((json) => {
-        expect(json.message).to.equal('Hello from API Gateway!');
-      })
+      .then((json) => expect(json.message).to.equal('Hello from API Gateway!'))
   );
 
   after(() => {
